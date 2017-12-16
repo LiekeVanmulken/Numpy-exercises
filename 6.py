@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats
 
-data1x = [
+data1x = np.array((
     10.0,
     8.0,
     13.0,
@@ -16,8 +16,8 @@ data1x = [
     12.0,
     7.0,
     5.0
-]
-data1y = [
+))
+data1y = np.array((
     8.04,
     6.95,
     7.58,
@@ -28,9 +28,9 @@ data1y = [
     4.26,
     10.84,
     4.82,
-    5.68]
+    5.68))
 
-data2x = [
+data2x = np.array((
     10.0,
     8.0,
     13.0,
@@ -42,9 +42,9 @@ data2x = [
     12.0,
     7.0,
     5.0
-]
+))
 
-data2y = [
+data2y = np.array((
     9.14,
     8.14,
     8.74,
@@ -55,8 +55,8 @@ data2y = [
     3.10,
     9.13,
     7.26,
-    4.74]
-data3x = [
+    4.74))
+data3x = np.array((
     10.0,
     8.0,
     13.0,
@@ -68,8 +68,8 @@ data3x = [
     12.0,
     7.0,
     5.0,
-]
-data3y = [
+))
+data3y = np.array((
     7.46,
     6.77,
     12.74,
@@ -81,8 +81,8 @@ data3y = [
     8.15,
     6.42,
     5.73
-]
-data4x = [
+))
+data4x = np.array((
     8.0,
     8.0,
     8.0,
@@ -94,9 +94,8 @@ data4x = [
     8.0,
     8.0,
     8.0,
-
-]
-data4y = [
+))
+data4y = np.array((
     6.58,
     5.76,
     7.71,
@@ -108,12 +107,19 @@ data4y = [
     5.56,
     7.91,
     6.89
-]
+))
 
-plt.plot(data1x, data1y, 'o', label='1')
-plt.plot(data2x, data2y, 'o', label='2')
-plt.plot(data3x, data3y, 'o', label='3')
-plt.plot(data4x, data4y, 'o', label='4')
+
+def calc(x, y, label, color, lw):
+    slope, intercept, r_value, p_value, std_err = stats.linregress(x, y)
+    plt.plot(x, y, 'o', label=label)
+    plt.plot(x, intercept + slope * x, color, label=label, lw=lw)
+
+
+calc(data1x, data1y, '1', 'r', 2.5)
+calc(data2x, data2y, '2', 'g', 2)
+calc(data3x, data3y, '3', 'b', 1)
+calc(data4x, data4y, '4', 'c', .5)
 
 print('mean x : ', end='')
 print(np.mean(data1x + data2x + data3x + data4x))
