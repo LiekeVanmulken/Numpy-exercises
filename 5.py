@@ -17,7 +17,7 @@ data = [140, 145, 160, 190, 155, 165, 150, 190,
 
 
 t = np.arange(0.0, 96, 1)
-
+# plt.plot(t, data)
 plt.hist(data, 30)
 
 plt.xlabel('lbs')
